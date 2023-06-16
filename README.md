@@ -68,4 +68,4 @@ Response:
 - Utilização do banco de dados Postgree, tentei implementar nesta fase, mas não consegui realizar a migração/criação do banco através da aplicação e por isso optei por implementar nas próximas fases já que não era uma exigência desta etapa da entrega.
 
 ## 📁 Acesso ao projeto
-Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/gui-lirasilva/Edige-POO/tree/master/src).
+Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/LucianneCharro/TechChallenge-Fase1/tree/postech/fase1/src).
