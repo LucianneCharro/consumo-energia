@@ -19,7 +19,7 @@ Receber informações através do Controller em formato HTTP POST.
 - ``Java 18``
 - ``InteliJ IDEA``
 - ``Testes via INSONMIA``
-- ``Injeção de depêndencias, collections, exemplo mappers, utilização do Lombok, Bean Validation, Tratamento de errorr Handler ``
+- ``Injeção de depêndencias, collections, exemplo mappers, utilização do Lombok, Bean Validation, Tratamento de exceção``
 ## 🛠️ Exemplo Json/Rotas de cada API
 
 1. #### Request/Response:
