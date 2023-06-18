@@ -1,6 +1,6 @@
-package br.com.alura.consumoenergia.repository;
+package br.com.alura.consumoenergia.eletrodomestico.repository;
 
-import br.com.alura.consumoenergia.dominio.Eletrodomestico;
+import br.com.alura.consumoenergia.eletrodomestico.dominio.Eletrodomestico;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;

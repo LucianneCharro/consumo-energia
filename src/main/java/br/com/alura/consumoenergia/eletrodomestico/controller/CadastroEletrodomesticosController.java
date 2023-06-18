@@ -1,17 +1,17 @@
-package br.com.alura.consumoenergia.controller;
+package br.com.alura.consumoenergia.eletrodomestico.controller;
 
-import br.com.alura.consumoenergia.controller.form.EletrodomesticoForm;
-import br.com.alura.consumoenergia.dominio.Eletrodomestico;
-import br.com.alura.consumoenergia.repository.RepositorioEletrodomestico;
+import br.com.alura.consumoenergia.eletrodomestico.dominio.Eletrodomestico;
+import br.com.alura.consumoenergia.eletrodomestico.dto.EletrodomesticoDto;
+import br.com.alura.consumoenergia.eletrodomestico.repository.RepositorioEletrodomestico;
+import br.com.alura.consumoenergia.endereco.controller.CadastroEnderecoController;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -23,10 +23,12 @@ import java.util.stream.Collectors;
 public class CadastroEletrodomesticosController {
     private Validator validator;
     private RepositorioEletrodomestico repositorioEletrodomestico;
+    private static final Logger logger = LoggerFactory.getLogger(CadastroEnderecoController.class);
 
     @PostMapping
-    public ResponseEntity cadastrarEletrodomestico(@RequestBody EletrodomesticoForm eletrodomesticoRequest) {
-
+    public ResponseEntity cadastrarEletrodomestico(@RequestBody EletrodomesticoDto eletrodomesticoRequest,
+                                                   @RequestHeader(value = "correlationId") String correlationId){
+        logger.info("request: " + Map.of("correlationId", correlationId, "request", eletrodomesticoRequest));
         Map<Path, String> violacoesToMap = validar(eletrodomesticoRequest);
 
         if(!violacoesToMap.isEmpty()){

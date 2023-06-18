@@ -1,4 +1,4 @@
-package br.com.alura.consumoenergia.controller.form;
+package br.com.alura.consumoenergia.pessoa.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PessoasForm {
+public class PessoaDto {
     @NotBlank(message = "nome é um campo obrigatório e não pode estar em branco")
     private String nome;
     @NotBlank(message = "data de nascimento é um campo obrigatório e não pode estar em branco")

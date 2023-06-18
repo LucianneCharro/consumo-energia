@@ -1,4 +1,4 @@
-package br.com.alura.consumoenergia.dominio;
+package br.com.alura.consumoenergia.eletrodomestico.dominio;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.googlecode.jmapper.annotations.JMap;

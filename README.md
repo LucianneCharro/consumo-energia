@@ -19,7 +19,7 @@ Receber informações através do Controller em formato HTTP POST.
 - ``Java 18``
 - ``InteliJ IDEA``
 - ``Testes via INSONMIA``
-- ``Injeção de depêndencias, collections, exemplo mappers, utilização do Lombok, Bean Validation``
+- ``Injeção de depêndencias, collections, exemplo mappers, utilização do Lombok, Bean Validation, Tratamento de errorr Handler ``
 ## 🛠️ Exemplo Json/Rotas de cada API
 
 1. #### Request/Response:
@@ -27,46 +27,73 @@ Receber informações através do Controller em formato HTTP POST.
 Request:
   {
   "rua": "Rua João Teixeira",
-  "numero": "190",
-  "bairro": "Campesina",
+  "numero": "110",
+  "bairro": "Bela Vista",
   "cidade": "Osasco",
   "estado": "São Paulo"
   }
 Response:
+  {
   Status 200 OK "Endereço cadastrado com sucesso"
-  Status 400 OK "Mensagem de campo obrigatório e não pode estar em branco"
+  }
+
+  {
+  "timestamp": "2023-06-18T21:08:53.783766900Z",
+  "code": 400,
+  "httpStatus": "BAD_REQUEST",
+  "mensagem": "Informar 'correlationID' no Header.",
+  "path": "/consumo-energia/endereco"
+  }
 #### 
 - `API de gestão de pessoas`:
 Request:
   {
   "nome": "Lucas Ballico",
-  "data_nascimento": "25/04/1990",
-  "sexo": "Feminino",
+  "data_nascimento": "25/04/2000",
+  "sexo": "Masculino",
   "grau_parentesco": "Filho"
   }
 Response:
+ {
   Status 200 OK "Pessoa cadastrada com sucesso"
-  Status 400 OK "Mensagem de campo obrigatório e não pode estar em branco"
+ }
+
+ {
+  "timestamp": "2023-06-18T21:08:53.783766900Z",
+  "code": 400,
+  "httpStatus": "BAD_REQUEST",
+  "mensagem": "Informar 'correlationID' no Header.",
+  "path": "/consumo-energia/pessoa"
+  }
 #### 
 - `API de gestão de eletrodomésticos`:
-Request:
+R}equest:
   {
   "nome": "Geladeira",
   "modelo": "Eletrolux",
   "potencia": "110"
   }
 Response:
+  {
   Status 200 OK "Eletrodomestico cadastrado com sucesso"
-  Status 400 OK "Mensagem de campo obrigatório e não pode estar em branco"
+  }
+
+  {
+  "timestamp": "2023-06-18T21:08:53.783766900Z",
+  "code": 400,
+  "httpStatus": "BAD_REQUEST",
+  "mensagem": "Informar 'correlationID' no Header.",
+  "path": "/consumo-energia/eletrodomestico"
+  }
 
 2. #### Rotas de cada API:
-- `API de cadastro de endereço`: http://localhost:8080/consumo-energia/endereco
-- `API de gestão de pessoas`: http://localhost:8080/consumo-energia/pessoa
-- `API de gestão de eletrodomésticos`: http://localhost:8080/consumo-energia/eletrodomestico
+- `API de cadastro de endereço`: http://localhost:80/consumo-energia/endereco
+- `API de gestão de pessoas`: http://localhost:80/consumo-energia/pessoa
+- `API de gestão de eletrodomésticos`: http://localhost:80/consumo-energia/eletrodomestico
 
 ## 🎯 Desafios encontrados:
 - Utilização do banco de dados Postgree, tentei implementar nesta fase, mas não consegui realizar a migração/criação do banco através da aplicação e por isso optei por implementar nas próximas fases já que não era uma exigência desta etapa da entrega.
 
 ## 📁 Acesso ao projeto
-Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/LucianneCharro/TechChallenge-Fase1/tree/postech/fase1/src).
+Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/LucianneCharro/pet-tech/tree/pet-tech).
 # consumo-energia

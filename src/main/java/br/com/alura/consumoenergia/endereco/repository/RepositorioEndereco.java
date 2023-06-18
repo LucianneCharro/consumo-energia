@@ -1,6 +1,6 @@
-package br.com.alura.consumoenergia.repository;
+package br.com.alura.consumoenergia.endereco.repository;
 
-import br.com.alura.consumoenergia.dominio.Endereco;
+import br.com.alura.consumoenergia.endereco.dominio.Endereco;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package br.com.alura.consumoenergia.controller.form;
+package br.com.alura.consumoenergia.endereco.dto;
 
 import com.googlecode.jmapper.annotations.JMap;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EnderecoForm {
+public class EnderecoDto {
     @JMap
     @NotBlank(message = "rua é um campo obrigatório e não pode estar em branco")
     private String rua;
