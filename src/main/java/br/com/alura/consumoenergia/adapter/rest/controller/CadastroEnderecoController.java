@@ -1,8 +1,8 @@
-package br.com.alura.consumoenergia.endereco.controller;
+package br.com.alura.consumoenergia.adapter.rest.controller;
 
-import br.com.alura.consumoenergia.endereco.dto.EnderecoDto;
-import br.com.alura.consumoenergia.endereco.dominio.Endereco;
-import br.com.alura.consumoenergia.endereco.repository.RepositorioEndereco;
+import br.com.alura.consumoenergia.adapter.rest.controller.dto.EnderecoDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.dominio.Endereco;
+import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioEndereco;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RequestMapping("/consumo-energia/endereco")
+@RequestMapping("/consumo-energia/v1")
 @RestController
 @AllArgsConstructor
 public class CadastroEnderecoController {
@@ -25,7 +25,7 @@ public class CadastroEnderecoController {
     private RepositorioEndereco repositorioEndereco;
     private static final Logger logger = LoggerFactory.getLogger(CadastroEnderecoController.class);
 
-    @PostMapping
+    @PostMapping("/endereco")
         public ResponseEntity cadastrarEndereco(@RequestBody EnderecoDto enderecoRequest,
                                                 @RequestHeader(value = "correlationId") String correlationId) {
         logger.info("request: " + Map.of("correlationId", correlationId, "request", enderecoRequest));
@@ -34,9 +34,7 @@ public class CadastroEnderecoController {
         if(!violacoesToMap.isEmpty()){
             return ResponseEntity.badRequest().body(violacoesToMap);
         }
-        Endereco endereco = new Endereco(enderecoRequest.getRua(), enderecoRequest.getNumero(), enderecoRequest.getBairro(), enderecoRequest.getCidade(), enderecoRequest.getEstado());
-        repositorioEndereco.salvar(endereco);
-        return ResponseEntity.ok("Endereço cadastrado com sucesso");
+         return ResponseEntity.ok("Endereço cadastrado com sucesso");
     }
     private <T> Map<Path, String> validar(T form) {
         Set<ConstraintViolation<T>> violacoes =

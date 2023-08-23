@@ -1,9 +1,8 @@
-package br.com.alura.consumoenergia.eletrodomestico.controller;
+package br.com.alura.consumoenergia.adapter.rest.controller;
 
-import br.com.alura.consumoenergia.eletrodomestico.dominio.Eletrodomestico;
-import br.com.alura.consumoenergia.eletrodomestico.dto.EletrodomesticoDto;
-import br.com.alura.consumoenergia.eletrodomestico.repository.RepositorioEletrodomestico;
-import br.com.alura.consumoenergia.endereco.controller.CadastroEnderecoController;
+import br.com.alura.consumoenergia.adapter.rest.controller.dominio.Eletrodomestico;
+import br.com.alura.consumoenergia.adapter.rest.controller.dto.EletrodomesticoDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioEletrodomestico;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -17,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RequestMapping("/consumo-energia/eletrodomestico")
+@RequestMapping("/consumo-energia/v1")
 @RestController
 @AllArgsConstructor
 public class CadastroEletrodomesticosController {
@@ -25,19 +24,18 @@ public class CadastroEletrodomesticosController {
     private RepositorioEletrodomestico repositorioEletrodomestico;
     private static final Logger logger = LoggerFactory.getLogger(CadastroEnderecoController.class);
 
-    @PostMapping
+    @PostMapping("/eletrodomestico")
     public ResponseEntity cadastrarEletrodomestico(@RequestBody EletrodomesticoDto eletrodomesticoRequest,
-                                                   @RequestHeader(value = "correlationId") String correlationId){
+                                                   @RequestHeader(value = "correlationId") String correlationId) {
         logger.info("request: " + Map.of("correlationId", correlationId, "request", eletrodomesticoRequest));
         Map<Path, String> violacoesToMap = validar(eletrodomesticoRequest);
 
-        if(!violacoesToMap.isEmpty()){
+        if (!violacoesToMap.isEmpty()) {
             return ResponseEntity.badRequest().body(violacoesToMap);
         }
-        Eletrodomestico eletrodomestico = new Eletrodomestico(eletrodomesticoRequest.getNome(), eletrodomesticoRequest.getModelo(), eletrodomesticoRequest.getPotencia());
-        repositorioEletrodomestico.salvar(eletrodomestico);
         return ResponseEntity.ok("Eletrodomestico cadastrado com sucesso");
     }
+
     private <T> Map<Path, String> validar(T form) {
         Set<ConstraintViolation<T>> violacoes =
                 validator.validate(form);

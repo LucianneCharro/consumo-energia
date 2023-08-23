@@ -1,13 +1,21 @@
-package br.com.alura.consumoenergia.endereco.dto;
+package br.com.alura.consumoenergia.adapter.rest.controller.dto;
 
 import com.googlecode.jmapper.annotations.JMap;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
+@Entity
+@Table(name="TBL_ENDERECO")
 public class EnderecoDto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @JMap
     @NotBlank(message = "rua é um campo obrigatório e não pode estar em branco")
     private String rua;
@@ -23,4 +31,6 @@ public class EnderecoDto {
     @JMap
     @NotBlank(message = "estado é um campo obrigatório e não pode estar em branco")
     private String estado;
+    @ManyToMany
+    private Set<PessoaDto> pessoas;
 }
