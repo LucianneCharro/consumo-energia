@@ -1,4 +1,4 @@
-package br.com.alura.consumoenergia.adapter.rest.controller.dominio;
+package br.com.alura.consumoenergia.adapter.rest.controller.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.googlecode.jmapper.annotations.JMap;

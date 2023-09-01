@@ -1,7 +1,8 @@
 package br.com.alura.consumoenergia.adapter.rest.controller;
 
-import br.com.alura.consumoenergia.adapter.rest.controller.dto.EnderecoDto;
-import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioEndereco;
+import br.com.alura.consumoenergia.adapter.rest.controller.dto.PessoaDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.dto.UsuarioDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioUsuario;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -16,64 +17,59 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RequestMapping("/consumo-energia/endereco")
+@RequestMapping("/consumo-energia/usuario")
 @RestController
 @AllArgsConstructor
-public class CadastroEnderecoController {
-
+public class CadastroUsuarioController {
     private Validator validator;
-    private RepositorioEndereco repositorioEndereco;
-    private static final Logger logger = LoggerFactory.getLogger(CadastroEnderecoController.class);
-
+    private RepositorioUsuario repositoriousuario;
+    private static final Logger logger = LoggerFactory.getLogger(CadastroUsuarioController.class);
     @PostMapping
-    public ResponseEntity cadastrarEndereco(@RequestBody EnderecoDto endereco,
-                                            @RequestHeader(value = "correlationId") String correlationId) {
-        logger.info("request: " + Map.of("correlationId", correlationId, "request", endereco));
-        Map<Path, String> violacoesToMap = validar(endereco);
+    public ResponseEntity cadastrarUsuario(@RequestBody UsuarioDto usuario,
+                                           @RequestHeader(value = "correlationId") String correlationId) {
+        logger.info("request: " + Map.of("correlationId", correlationId, "request", usuario));
+        Map<Path, String> violacoesToMap = validar(usuario);
 
         if (!violacoesToMap.isEmpty()) {
             return ResponseEntity.badRequest().body(violacoesToMap);
         }
-        var result = repositorioEndereco.findByRua(endereco.getRua());
+        var result = repositoriousuario.findByEmail(usuario.getEmail());
         if (result.isEmpty()) {
-            EnderecoDto saved = repositorioEndereco.save(endereco);
+            UsuarioDto saved = repositoriousuario.save(usuario);
             return ResponseEntity.ok(saved);
         }
         return ResponseEntity.badRequest().build();
     }
-
     @GetMapping("/{id}")
-    public ResponseEntity consultarEndereco(@PathVariable Long id) {
-        Optional<EnderecoDto> result = repositorioEndereco.findById(id);
+    public ResponseEntity consultarUsuario(@PathVariable Long id) {
+        Optional<UsuarioDto> result = repositoriousuario.findById(id);
         if (result.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(result.get());
     }
-
     @PutMapping("/{id}")
-    public ResponseEntity<EnderecoDto> atualizarEndereco(@PathVariable Long id,
-                                              @RequestBody EnderecoDto endereco) {
-        var exists = repositorioEndereco.findByRuaAndNumeroIgnoreCaseAndIdNot(endereco.getRua(), endereco.getNumero(), id);
+    public ResponseEntity<UsuarioDto> atualizarUsuario(@PathVariable Long id,
+                                                      @RequestBody UsuarioDto usuario) {
+        var exists = repositoriousuario.findByEmail(usuario.getEmail());
         if (!exists.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        if (!repositorioEndereco.existsById(id)) {
+        if (!repositoriousuario.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        var updated = repositorioEndereco.save(endereco);
+        var updated = repositoriousuario.save(usuario);
         return ResponseEntity.ok(updated);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<EnderecoDto> excluirEndereco(@PathVariable Long id) {
-        var result = repositorioEndereco.findById(id);
+    public ResponseEntity<UsuarioDto> excluirUsuario(@PathVariable Long id) {
+        var result = repositoriousuario.findById(id);
         if (result.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        repositorioEndereco.deleteById(id);
+        repositoriousuario.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
     private <T> Map<Path, String> validar(T form) {
         Set<ConstraintViolation<T>> violacoes =
                 validator.validate(form);
@@ -84,4 +80,3 @@ public class CadastroEnderecoController {
         return violacoesToMap;
     }
 }
-

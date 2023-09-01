@@ -1,4 +1,4 @@
-package br.com.alura.consumoenergia.adapter.rest.controller.dominio;
+package br.com.alura.consumoenergia.adapter.rest.controller.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.googlecode.jmapper.annotations.JMap;
@@ -18,14 +18,14 @@ public class Pessoa {
     private String data_nascimento;
     @JMap
     @JsonProperty
-    private String sexo;
+    private String cpf;
     @JMap
     @JsonProperty
-    private String grau_parentesco;
-    public Pessoa(String nome, String data_nascimento, String sexo, String grau_parentesco) {
+    private String sexo;
+    public Pessoa(String nome, String data_nascimento, String cpf, String sexo) {
         this.nome = nome;
         this.data_nascimento = data_nascimento;
+        this.cpf = cpf;
         this.sexo = sexo;
-        this.grau_parentesco = grau_parentesco;
     }
 }

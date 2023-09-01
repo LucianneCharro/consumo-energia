@@ -1,9 +1,10 @@
 package br.com.alura.consumoenergia.adapter.rest.controller;
 
-import br.com.alura.consumoenergia.adapter.rest.controller.dto.EletrodomesticoDto;
-import br.com.alura.consumoenergia.adapter.rest.controller.dto.PessoaDto;
-import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioPessoa;
 import br.com.alura.consumoenergia.adapter.rest.controller.dto.ParentescoDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.dto.PessoaDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.dto.UsuarioDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioParentesco;
+import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioUsuario;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -18,59 +19,57 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RequestMapping("/consumo-energia/pessoa")
+@RequestMapping("/consumo-energia/parentesco")
 @RestController
 @AllArgsConstructor
-public class CadastroPessoaController {
+public class CadastroParentescoController {
     private Validator validator;
-    private RepositorioPessoa repositorioPessoa;
-
-    private static final Logger logger = LoggerFactory.getLogger(CadastroPessoaController.class);
-
+    private RepositorioParentesco repositorioparentesco;
+    private static final Logger logger = LoggerFactory.getLogger(CadastroParentescoController.class);
     @PostMapping
-    public ResponseEntity cadastrarPessoa(@RequestBody PessoaDto pessoa,
-                                                   @RequestHeader(value = "correlationId") String correlationId) {
-        logger.info("request: " + Map.of("correlationId", correlationId, "request", pessoa));
-        Map<Path, String> violacoesToMap = validar(pessoa);
+    public ResponseEntity cadastrarUsuario(@RequestBody ParentescoDto parentesco,
+                                           @RequestHeader(value = "correlationId") String correlationId) {
+        logger.info("request: " + Map.of("correlationId", correlationId, "request", parentesco));
+        Map<Path, String> violacoesToMap = validar(parentesco);
 
         if (!violacoesToMap.isEmpty()) {
             return ResponseEntity.badRequest().body(violacoesToMap);
         }
-        var result = repositorioPessoa.findByCpf(pessoa.getCpf());
+        var result = repositorioparentesco.findByDescricao(parentesco.getDescricao());
         if (result.isEmpty()) {
-            PessoaDto saved = repositorioPessoa.save(pessoa);
+            ParentescoDto saved = repositorioparentesco.save(parentesco);
             return ResponseEntity.ok(saved);
         }
         return ResponseEntity.badRequest().build();
     }
     @GetMapping("/{id}")
     public ResponseEntity consultarPessoa(@PathVariable Long id) {
-        Optional<PessoaDto> result = repositorioPessoa.findById(id);
+        Optional<ParentescoDto> result = repositorioparentesco.findById(id);
         if (result.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(result.get());
     }
     @PutMapping("/{id}")
-    public ResponseEntity<PessoaDto> atualizarPessoa(@PathVariable Long id,
-                                                                       @RequestBody PessoaDto pessoa) {
-        var exists = repositorioPessoa.findByCpfAndNomeIgnoreCaseAndIdNot(pessoa.getCpf(), pessoa.getNome(), id);
+    public ResponseEntity<ParentescoDto> atualizarPessoa(@PathVariable Long id,
+                                                      @RequestBody ParentescoDto parentesco) {
+        var exists = repositorioparentesco.findByDescricao(parentesco.getDescricao());
         if (!exists.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        if (!repositorioPessoa.existsById(id)) {
+        if (!repositorioparentesco.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        var updated = repositorioPessoa.save(pessoa);
+        var updated = repositorioparentesco.save(parentesco);
         return ResponseEntity.ok(updated);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<PessoaDto> excluirPessoa(@PathVariable Long id) {
-        var result = repositorioPessoa.findById(id);
+    public ResponseEntity<ParentescoDto> excluirPessoa(@PathVariable Long id) {
+        var result = repositorioparentesco.findById(id);
         if (result.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        repositorioPessoa.deleteById(id);
+        repositorioparentesco.deleteById(id);
         return ResponseEntity.ok().build();
     }
     private <T> Map<Path, String> validar(T form) {
@@ -83,4 +82,3 @@ public class CadastroPessoaController {
         return violacoesToMap;
     }
 }
-

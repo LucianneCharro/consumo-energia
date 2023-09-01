@@ -5,20 +5,22 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @Entity
 @Table(name="TBL_ELETRODOMESTICO")
 public class EletrodomesticoDto {
     @Id
+    @Column(name = "ID_ELETRODOMESTICO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "NOME")
     @NotBlank(message = "nome é um campo obrigatório e não pode estar em branco")
     private String nome;
+    @Column(name = "MODELO")
     @NotBlank(message = "modelo é um campo obrigatório e não pode estar em branco")
     private String modelo;
+    @Column(name = "POTENCIA")
     @NotBlank(message = "potencia é um campo obrigatório e não pode estar em branco")
     private String potencia;
 }
