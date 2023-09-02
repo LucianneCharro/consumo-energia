@@ -28,17 +28,13 @@ public class PessoaDto {
     @Column(name = "SEXO")
     @NotBlank(message = "sexo é um campo obrigatório e não pode estar em branco")
     private String sexo;
-    @ManyToMany
-    @JoinTable(name = "TBL_REL_PESSOA_ENDERECO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+    @Column(name = "PARENTESCO")
+    @NotBlank(message = "parentesco é um campo obrigatório e não pode estar em branco")
+    private String grau_parentesco;
+    @OneToMany
+    @JoinColumn(name = "ID_ENDERECO")
     private List<EnderecoDto> endereco;
-    @ManyToMany
-    @JoinTable(name = "TBL_REL_PESSOA_ELETRODOMESTICO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_ELETRODOMESTICO"))
-    private List<EletrodomesticoDto> eletrodomestico;
-    @OneToOne
-    @JoinColumn(name = "ID_PARENTESCO")
-    private ParentescoDto parentesco;
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO")
+    private UsuarioDto usuario;
 }

@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -35,4 +37,8 @@ public class EnderecoDto {
     @Column(name = "ESTADO")
     @NotBlank(message = "estado é um campo obrigatório e não pode estar em branco")
     private String estado;
+    @OneToMany
+    @JoinColumn(name = "ID_ELETRODOMESTICO")
+    private List<EletrodomesticoDto> eletrodomestico;
+
 }

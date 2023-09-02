@@ -1,9 +1,7 @@
 package br.com.alura.consumoenergia.adapter.rest.controller;
 
-import br.com.alura.consumoenergia.adapter.rest.controller.dto.EletrodomesticoDto;
 import br.com.alura.consumoenergia.adapter.rest.controller.dto.PessoaDto;
 import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioPessoa;
-import br.com.alura.consumoenergia.adapter.rest.controller.dto.ParentescoDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -29,10 +27,9 @@ public class CadastroPessoaController {
 
     @PostMapping
     public ResponseEntity cadastrarPessoa(@RequestBody PessoaDto pessoa,
-                                                   @RequestHeader(value = "correlationId") String correlationId) {
+                                          @RequestHeader(value = "correlationId") String correlationId) {
         logger.info("request: " + Map.of("correlationId", correlationId, "request", pessoa));
         Map<Path, String> violacoesToMap = validar(pessoa);
-
         if (!violacoesToMap.isEmpty()) {
             return ResponseEntity.badRequest().body(violacoesToMap);
         }

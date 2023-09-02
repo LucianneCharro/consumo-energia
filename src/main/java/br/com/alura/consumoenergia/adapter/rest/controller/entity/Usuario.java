@@ -8,17 +8,21 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@EqualsAndHashCode(of = {"email", "senha"})
+@EqualsAndHashCode(of = {"login", "senha", "flag"})
 public class Usuario {
     @JMap
     @JsonProperty
-    private String email;
+    private String login;
     @JMap
     @JsonProperty
     private String senha;
-    public Usuario(String email, String senha) {
-        this.email = email;
+    @JMap
+    @JsonProperty
+    private String flag;
+    public Usuario(String login, String senha, String flag) {
+        this.login = login;
         this.senha = senha;
+        this.flag = flag;
 
     }
 }

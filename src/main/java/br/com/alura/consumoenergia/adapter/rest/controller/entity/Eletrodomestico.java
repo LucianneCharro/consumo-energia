@@ -19,7 +19,6 @@ public class Eletrodomestico {
     @JMap
     @JsonProperty
     private String potencia;
-
     public Eletrodomestico(String nome, String modelo, String potencia) {
         this.nome = nome;
         this.modelo = modelo;

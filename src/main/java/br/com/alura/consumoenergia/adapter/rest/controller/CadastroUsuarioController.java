@@ -1,6 +1,5 @@
 package br.com.alura.consumoenergia.adapter.rest.controller;
 
-import br.com.alura.consumoenergia.adapter.rest.controller.dto.PessoaDto;
 import br.com.alura.consumoenergia.adapter.rest.controller.dto.UsuarioDto;
 import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioUsuario;
 import jakarta.validation.ConstraintViolation;
@@ -29,11 +28,10 @@ public class CadastroUsuarioController {
                                            @RequestHeader(value = "correlationId") String correlationId) {
         logger.info("request: " + Map.of("correlationId", correlationId, "request", usuario));
         Map<Path, String> violacoesToMap = validar(usuario);
-
         if (!violacoesToMap.isEmpty()) {
             return ResponseEntity.badRequest().body(violacoesToMap);
         }
-        var result = repositoriousuario.findByEmail(usuario.getEmail());
+        var result = repositoriousuario.findByLogin(usuario.getLogin());
         if (result.isEmpty()) {
             UsuarioDto saved = repositoriousuario.save(usuario);
             return ResponseEntity.ok(saved);
@@ -51,7 +49,7 @@ public class CadastroUsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioDto> atualizarUsuario(@PathVariable Long id,
                                                       @RequestBody UsuarioDto usuario) {
-        var exists = repositoriousuario.findByEmail(usuario.getEmail());
+        var exists = repositoriousuario.findByLogin(usuario.getLogin());
         if (!exists.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }

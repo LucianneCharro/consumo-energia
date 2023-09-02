@@ -3,8 +3,7 @@
 Serão construidas APIs que um portal poderá consumir para apresentar aos usuários os dados de consumo de cada eletrodoméstico. Serão realizados calculos que vão gerar alertas aos usuários.
 Isso permitirá a criação de um painel de controle, no qual será possível visualizar o consumo de energia de cada aparelho eletrônico e usuário.
 
-## 🔨 Funcionalidades do projeto nessa primeira fase
-
+## 🔨 Funcionalidades do projeto nessa segunda fase
 - `Funcionalidade 1` `API de cadastro de endereço`: A API tem como objetivo permitir o gerenciamento de informações sobre os endereços cadastrados em nosso sistema. Para cadastrar um endereço, deve ser informada sua rua, número, bairro, cidade e estado válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
 Receber informações através do Controller em formato HTTP POST.
 #### 
@@ -20,7 +19,11 @@ Receber informações através do Controller em formato HTTP POST.
 - ``InteliJ IDEA``
 - ``Testes via INSONMIA``
 - ``Injeção de depêndencias, collections, exemplo mappers, utilização do Lombok, Bean Validation, Tratamento de exceção``
+- ``Persistencia Banco de dados Postgree``
+
 ## 🛠️ Exemplo Json/Rotas de cada API
+
+
 
 1. #### Request/Response:
 - `API de cadastro de endereço`:
