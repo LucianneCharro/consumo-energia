@@ -10,5 +10,4 @@ import java.util.List;
 public interface RepositorioPessoa extends JpaRepository<PessoaDto, Long> {
     List<PessoaDto> findByCpf(String cpf);
 
-//    List<PessoaDto> findByCpfAndNomeIgnoreCaseAndIdNot(String cpf, String nome, Long id);
 }

@@ -25,6 +25,7 @@ public class CadastroUsuarioController {
     @Autowired
     private RepositorioUsuario repositoriousuario;
     private static final Logger logger = LoggerFactory.getLogger(CadastroUsuarioController.class);
+
     @PostMapping
     public ResponseEntity cadastrarUsuario(@RequestBody UsuarioDto usuario,
                                            @RequestHeader(value = "correlationId") String correlationId) {
@@ -40,6 +41,7 @@ public class CadastroUsuarioController {
         }
         return ResponseEntity.badRequest().build();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity consultarUsuario(@PathVariable Long id) {
         Optional<UsuarioDto> result = repositoriousuario.findById(id);
@@ -48,19 +50,18 @@ public class CadastroUsuarioController {
         }
         return ResponseEntity.ok(result.get());
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioDto> atualizarUsuario(@PathVariable Long id,
-                                                      @RequestBody UsuarioDto usuario) {
-        var exists = repositoriousuario.findByLogin(usuario.getLogin());
-        if (!exists.isEmpty()) {
+                                                       @RequestBody UsuarioDto usuario) {
+        Optional<UsuarioDto> exists = repositoriousuario.findById(id);
+        if (exists.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-        if (!repositoriousuario.existsById(id)) {
-            return ResponseEntity.notFound().build();
         }
         var updated = repositoriousuario.save(usuario);
         return ResponseEntity.ok(updated);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<UsuarioDto> excluirUsuario(@PathVariable Long id) {
         var result = repositoriousuario.findById(id);
@@ -70,6 +71,7 @@ public class CadastroUsuarioController {
         repositoriousuario.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
     private <T> Map<Path, String> validar(T form) {
         Set<ConstraintViolation<T>> violacoes =
                 validator.validate(form);

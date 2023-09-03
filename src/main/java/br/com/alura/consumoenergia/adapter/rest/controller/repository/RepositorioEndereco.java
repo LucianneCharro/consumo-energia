@@ -11,5 +11,4 @@ public interface RepositorioEndereco extends JpaRepository<EnderecoDto, Long> {
 
     List<EnderecoDto> findByRua(String rua);
 
-//    List<EnderecoDto> findByRuaAndNumeroIgnoreCaseAndIdNot(String rua, String numero, Long id);
 }

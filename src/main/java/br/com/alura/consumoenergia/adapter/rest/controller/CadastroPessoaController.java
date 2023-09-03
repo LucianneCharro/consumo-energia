@@ -1,6 +1,7 @@
 package br.com.alura.consumoenergia.adapter.rest.controller;
 
 import br.com.alura.consumoenergia.adapter.rest.controller.dto.PessoaDto;
+import br.com.alura.consumoenergia.adapter.rest.controller.dto.UsuarioDto;
 import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioPessoa;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
@@ -42,6 +43,7 @@ public class CadastroPessoaController {
         }
         return ResponseEntity.badRequest().build();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity consultarPessoa(@PathVariable Long id) {
         Optional<PessoaDto> result = repositorioPessoa.findById(id);
@@ -50,19 +52,18 @@ public class CadastroPessoaController {
         }
         return ResponseEntity.ok(result.get());
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<PessoaDto> atualizarPessoa(@PathVariable Long id,
-                                                                       @RequestBody PessoaDto pessoa) {
-//        var exists = repositorioPessoa.findByCpfAndNomeIgnoreCaseAndIdNot(pessoa.getCpf(), pessoa.getNome(), id);
-//        if (!exists.isEmpty()) {
-//            return ResponseEntity.badRequest().build();
-//        }
-        if (!repositorioPessoa.existsById(id)) {
-            return ResponseEntity.notFound().build();
+                                                     @RequestBody PessoaDto pessoa) {
+        Optional<PessoaDto> exists = repositorioPessoa.findById(id);
+        if (exists.isEmpty()) {
+            return ResponseEntity.badRequest().build();
         }
         var updated = repositorioPessoa.save(pessoa);
         return ResponseEntity.ok(updated);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<PessoaDto> excluirPessoa(@PathVariable Long id) {
         var result = repositorioPessoa.findById(id);
@@ -72,6 +73,7 @@ public class CadastroPessoaController {
         repositorioPessoa.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
     private <T> Map<Path, String> validar(T form) {
         Set<ConstraintViolation<T>> violacoes =
                 validator.validate(form);

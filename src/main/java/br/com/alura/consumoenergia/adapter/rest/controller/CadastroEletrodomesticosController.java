@@ -42,6 +42,7 @@ public class CadastroEletrodomesticosController {
         }
         return ResponseEntity.badRequest().build();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity consultarEletrodomestico(@PathVariable Long id) {
         Optional<EletrodomesticoDto> result = repositorioEletrodomestico.findById(id);
@@ -53,17 +54,15 @@ public class CadastroEletrodomesticosController {
 
     @PutMapping("/{id}")
     public ResponseEntity<EletrodomesticoDto> atualizarEletrodomestico(@PathVariable Long id,
-                                                         @RequestBody EletrodomesticoDto eletrodomestico) {
-//        var exists = repositorioEletrodomestico.findByNomeAndModeloIgnoreCaseAndIdNot(eletrodomestico.getNome(), id);
-//        if (!exists.isEmpty()) {
-//            return ResponseEntity.badRequest().build();
-//        }
-        if (!repositorioEletrodomestico.existsById(id)) {
-            return ResponseEntity.notFound().build();
+                                                                       @RequestBody EletrodomesticoDto eletrodomestico) {
+        Optional<EletrodomesticoDto> exists = repositorioEletrodomestico.findById(id);
+        if (exists.isEmpty()) {
+            return ResponseEntity.badRequest().build();
         }
         var updated = repositorioEletrodomestico.save(eletrodomestico);
         return ResponseEntity.ok(updated);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<EletrodomesticoDto> excluirEletrodomestico(@PathVariable Long id) {
         var result = repositorioEletrodomestico.findById(id);
@@ -73,6 +72,7 @@ public class CadastroEletrodomesticosController {
         repositorioEletrodomestico.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
     private <T> Map<Path, String> validar(T form) {
         Set<ConstraintViolation<T>> violacoes =
                 validator.validate(form);

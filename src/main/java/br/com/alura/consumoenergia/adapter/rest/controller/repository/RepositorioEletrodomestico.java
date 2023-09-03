@@ -11,6 +11,5 @@ import java.util.List;
 public interface RepositorioEletrodomestico extends JpaRepository<EletrodomesticoDto, Long> {
     List<EletrodomesticoDto> findByNome(String nome);
 
-//    List<EletrodomesticoDto> findByNomeIgnoreCa(String nome, Long id);
 }
 
