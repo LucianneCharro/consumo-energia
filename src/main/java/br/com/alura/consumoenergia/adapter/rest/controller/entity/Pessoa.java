@@ -17,7 +17,7 @@ public class Pessoa {
     private String nome;
     @JMap
     @JsonProperty
-    private Date data_nascimento;
+    private String data_nascimento;
     @JMap
     @JsonProperty
     private String cpf;

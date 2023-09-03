@@ -15,7 +15,7 @@ public class Endereco {
     private String rua;
     @JMap
     @JsonProperty
-    private Integer numero;
+    private String numero;
     @JMap
     @JsonProperty
     private String bairro;

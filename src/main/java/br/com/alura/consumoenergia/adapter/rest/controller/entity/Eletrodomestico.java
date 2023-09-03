@@ -17,8 +17,8 @@ public class Eletrodomestico {
     private String nome;
     @JMap
     @JsonProperty
-    private Integer modelo;
+    private String modelo;
     @JMap
     @JsonProperty
-    private Double potencia;
+    private String potencia;
 }
