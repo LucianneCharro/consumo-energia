@@ -3,24 +3,31 @@
 Serão construidas APIs que um portal poderá consumir para apresentar aos usuários os dados de consumo de cada eletrodoméstico. Serão realizados calculos que vão gerar alertas aos usuários.
 Isso permitirá a criação de um painel de controle, no qual será possível visualizar o consumo de energia de cada aparelho eletrônico e usuário.
 
-## 🔨 Funcionalidades do projeto nessa primeira fase
-
-- `Funcionalidade 1` `API de cadastro de endereço`: A API tem como objetivo permitir o gerenciamento de informações sobre os endereços cadastrados em nosso sistema. Para cadastrar um endereço, deve ser informada sua rua, número, bairro, cidade e estado válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
-Receber informações através do Controller em formato HTTP POST.
+## 🔨 Funcionalidades do projeto nessa segunda fase
+- `Funcionalidade 1` `4 API de cadastro de endereço`: A API tem como objetivo permitir o gerenciamento de informações sobre os endereços cadastrados em nosso sistema. Para cadastrar um endereço, deve ser informada sua rua, número, bairro, cidade e estado válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
+Receber informações através do Controller em formato HTTP POST/GET/PUT/DELETE.
 #### 
-- `Funcionalidade 2` `API de gestão de pessoas`: A API tem como objetivo permitir o gerenciamento de informações sobre as pessoas cadastradas em nosso sistema. Para cadastrar uma pessoa, deve ser informado seu nome, data de nascimento, sexo e grau de parêntesco válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
-Receber informações através do Controller em formato HTTP POST.
+- `Funcionalidade 2` `4 API de gestão de pessoas`: A API tem como objetivo permitir o gerenciamento de informações sobre as pessoas cadastradas em nosso sistema. Para cadastrar uma pessoa, deve ser informado seu nome, data de nascimento, sexo e grau de parêntesco válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
+Receber informações através do Controller em formato HTTP POST/GET/PUT/DELETE.
 #### 
-- `Funcionalidade 3` `API de gestão de eletrodomésticos`: A API tem como objetivo permitir o gerenciamento de informações sobre os eletrodomésticos cadastrados em nosso sistema. Para cadastrar um eletrodoméstico, deve ser informado seu nome, modelo e potência válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
-Receber informações através do Controller em formato HTTP POST.
+- `Funcionalidade 3` `4 API de gestão de eletrodomésticos`: A API tem como objetivo permitir o gerenciamento de informações sobre os eletrodomésticos cadastrados em nosso sistema. Para cadastrar um eletrodoméstico, deve ser informado seu nome, modelo e potência válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
+Receber informações através do Controller em formato HTTP POST/GET/PUT/DELETE.
 
+#### 
+- `Funcionalidade 4` `4 API de gestão de usuários`: A API tem como objetivo permitir o gerenciamento de usuários cadastrados em nosso sistema. Para cadastrar um usuário, deve ser informado seu login, senha e flag que identifica se trata-se de usuário master ou não. Devem ser válidos e não podem estar preenchidos com brancos ou nulos. Todos os campos são obrigatórios. O sistema também deve gravar os dados no sistema.
+  Receber informações através do Controller em formato HTTP POST/GET/PUT/DELETE.
 ## ✔️ Técnicas e tecnologias utilizadas
 
 - ``Java 18``
 - ``InteliJ IDEA``
 - ``Testes via INSONMIA``
-- ``Injeção de depêndencias, collections, exemplo mappers, utilização do Lombok, Bean Validation, Tratamento de exceção``
+- ``Injeção de depêndencias, collections, exemplo mappers, utilização do Lombok, Bean Validation, Tratamento de exceção, Enum``
+- ``Persistencia Banco de dados Postgree, utilizado o Console ElephanteSQL``
+- ``Para modelagem de Dados utilizamos o DataModeler``
+
 ## 🛠️ Exemplo Json/Rotas de cada API
+
+Em anexo estão as collections do Insomnia.
 
 1. #### Request/Response:
 - `API de cadastro de endereço`:
@@ -86,14 +93,51 @@ Response:
   "path": "/consumo-energia/eletrodomestico"
   }
 
+#### 
+- `API de gestão de usuários`:
+  {
+  "id": 1,
+  "login": "Ballico",
+  "senha": "3333",
+  "flag": "S",
+  "pessoa": [
+  {
+  "id": 1,
+  "nome": "Lucianne",
+  "data_nascimento": "07/12/1980",
+  "cpf": "28681128888",
+  "sexo": "Feminino",
+  "grau_parentesco": "MAE",
+  "endereco": [
+  {
+  "id": 1,
+  "rua": "Joao de Deus",
+  "numero": "111",
+  "bairro": "Bela Vista",
+  "cidade": "Osasco",
+  "estado": "SP",
+  "eletrodomestico": [
+  {
+  "id": 1,
+  "nome": "Celular",
+  "modelo": "IPHONE",
+  "potencia": "1.0"
+  }
+  ]
+  }
+  ]
+  }
+  ]
+  }
 2. #### Rotas de cada API:
 - `API de cadastro de endereço`: http://localhost:80/consumo-energia/endereco
 - `API de gestão de pessoas`: http://localhost:80/consumo-energia/pessoa
 - `API de gestão de eletrodomésticos`: http://localhost:80/consumo-energia/eletrodomestico
+- `API de gestão de usuarios`: http://localhost:80/consumo-energia/usuarios
 
 ## 🎯 Desafios encontrados:
-- Utilização do banco de dados Postgree, tentei implementar nesta fase, mas não consegui realizar a migração/criação do banco através da aplicação e por isso optei por implementar nas próximas fases já que não era uma exigência desta etapa da entrega.
-
+- Entendimento do pedido do usuário para realizar o relacionamento do banco de dados.
+- 
 ## 📁 Acesso ao projeto
-Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/LucianneCharro/pet-tech/tree/pet-tech).
-# consumo-energia
+Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/LucianneCharro/consumo-energia/tree/feature-segunda-fase/src).
+
