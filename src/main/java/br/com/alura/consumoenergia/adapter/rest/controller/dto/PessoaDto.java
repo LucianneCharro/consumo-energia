@@ -1,10 +1,14 @@
 package br.com.alura.consumoenergia.adapter.rest.controller.dto;
 
+import br.com.alura.consumoenergia.adapter.rest.controller.enuns.TipoParentesco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -21,7 +25,7 @@ public class PessoaDto {
     private String nome;
     @Column(name = "DATA_NASCIMENTO")
     @NotBlank(message = "data de nascimento é um campo obrigatório e não pode estar em branco")
-    private String data_nascimento;
+    private Date data_nascimento;
     @Column(name = "CPF")
     @NotBlank(message = "cpf é um campo obrigatório e não pode estar em branco")
     private String cpf;
@@ -29,12 +33,10 @@ public class PessoaDto {
     @NotBlank(message = "sexo é um campo obrigatório e não pode estar em branco")
     private String sexo;
     @Column(name = "PARENTESCO")
+    @Enumerated(EnumType.STRING)
     @NotBlank(message = "parentesco é um campo obrigatório e não pode estar em branco")
-    private String grau_parentesco;
+    private TipoParentesco grau_parentesco;
     @OneToMany
     @JoinColumn(name = "ID_ENDERECO")
     private List<EnderecoDto> endereco;
-    @ManyToOne
-    @JoinColumn(name = "ID_USUARIO")
-    private UsuarioDto usuario;
 }

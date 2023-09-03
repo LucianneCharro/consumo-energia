@@ -19,8 +19,8 @@ public class EletrodomesticoDto {
     private String nome;
     @Column(name = "MODELO")
     @NotBlank(message = "modelo é um campo obrigatório e não pode estar em branco")
-    private String modelo;
+    private Integer modelo;
     @Column(name = "POTENCIA")
     @NotBlank(message = "potencia é um campo obrigatório e não pode estar em branco")
-    private String potencia;
+    private Double potencia;
 }

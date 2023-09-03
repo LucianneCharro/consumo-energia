@@ -1,7 +1,6 @@
 package br.com.alura.consumoenergia.adapter.rest.controller;
 
 import br.com.alura.consumoenergia.adapter.rest.controller.dto.EletrodomesticoDto;
-import br.com.alura.consumoenergia.adapter.rest.controller.dto.EnderecoDto;
 import br.com.alura.consumoenergia.adapter.rest.controller.repository.RepositorioEletrodomestico;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
@@ -53,10 +52,10 @@ public class CadastroEletrodomesticosController {
     @PutMapping("/{id}")
     public ResponseEntity<EletrodomesticoDto> atualizarEletrodomestico(@PathVariable Long id,
                                                          @RequestBody EletrodomesticoDto eletrodomestico) {
-        var exists = repositorioEletrodomestico.findByNomeAndModeloIgnoreCaseAndIdNot(eletrodomestico.getNome(), eletrodomestico.getModelo(), id);
-        if (!exists.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
+//        var exists = repositorioEletrodomestico.findByNomeAndModeloIgnoreCaseAndIdNot(eletrodomestico.getNome(), id);
+//        if (!exists.isEmpty()) {
+//            return ResponseEntity.badRequest().build();
+//        }
         if (!repositorioEletrodomestico.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

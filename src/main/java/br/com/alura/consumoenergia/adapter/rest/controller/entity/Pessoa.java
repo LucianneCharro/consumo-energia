@@ -1,10 +1,12 @@
 package br.com.alura.consumoenergia.adapter.rest.controller.entity;
 
+import br.com.alura.consumoenergia.adapter.rest.controller.enuns.TipoParentesco;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.googlecode.jmapper.annotations.JMap;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -15,7 +17,7 @@ public class Pessoa {
     private String nome;
     @JMap
     @JsonProperty
-    private String data_nascimento;
+    private Date data_nascimento;
     @JMap
     @JsonProperty
     private String cpf;
@@ -24,12 +26,8 @@ public class Pessoa {
     private String sexo;
     @JMap
     @JsonProperty
-    private String grau_parentesco;
-    public Pessoa(String nome, String data_nascimento, String cpf, String sexo, String grau_parentesco) {
-        this.nome = nome;
-        this.data_nascimento = data_nascimento;
-        this.cpf = cpf;
-        this.sexo = sexo;
-        this.grau_parentesco = grau_parentesco;
-    }
+    private TipoParentesco grau_parentesco;
+    @JsonProperty
+    private List<Endereco> endereco;
+
 }

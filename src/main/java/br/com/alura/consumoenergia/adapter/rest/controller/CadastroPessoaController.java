@@ -51,10 +51,10 @@ public class CadastroPessoaController {
     @PutMapping("/{id}")
     public ResponseEntity<PessoaDto> atualizarPessoa(@PathVariable Long id,
                                                                        @RequestBody PessoaDto pessoa) {
-        var exists = repositorioPessoa.findByCpfAndNomeIgnoreCaseAndIdNot(pessoa.getCpf(), pessoa.getNome(), id);
-        if (!exists.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
+//        var exists = repositorioPessoa.findByCpfAndNomeIgnoreCaseAndIdNot(pessoa.getCpf(), pessoa.getNome(), id);
+//        if (!exists.isEmpty()) {
+//            return ResponseEntity.badRequest().build();
+//        }
         if (!repositorioPessoa.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

@@ -2,9 +2,9 @@ package br.com.alura.consumoenergia.adapter.rest.controller.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.googlecode.jmapper.annotations.JMap;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -19,10 +19,6 @@ public class Usuario {
     @JMap
     @JsonProperty
     private String flag;
-    public Usuario(String login, String senha, String flag) {
-        this.login = login;
-        this.senha = senha;
-        this.flag = flag;
-
-    }
+    @JsonProperty
+    private List<Pessoa> pessoa;
 }

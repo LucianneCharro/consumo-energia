@@ -24,7 +24,7 @@ public class EnderecoDto {
     @JMap
     @Column(name = "NUMERO")
     @NotBlank(message = "numero é um campo obrigatório e não pode estar em branco")
-    private String numero;
+    private Integer numero;
     @JMap
     @Column(name = "BAIRRO")
     @NotBlank(message = "bairro é um campo obrigatório e não pode estar em branco")

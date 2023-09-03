@@ -2,9 +2,10 @@ package br.com.alura.consumoenergia.adapter.rest.controller.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.googlecode.jmapper.annotations.JMap;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
+
 @Setter
 @Getter
 @EqualsAndHashCode(of = {"endereco", "rua", "numero","bairro","cidade","estado"})
@@ -14,7 +15,7 @@ public class Endereco {
     private String rua;
     @JMap
     @JsonProperty
-    private String numero;
+    private Integer numero;
     @JMap
     @JsonProperty
     private String bairro;
@@ -24,12 +25,6 @@ public class Endereco {
     @JMap
     @JsonProperty
     private String estado;
-
-    public Endereco(String rua, String numero, String bairro, String cidade, String estado) {
-        this.rua = rua;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
-    }
+    @JsonProperty
+    private List<Eletrodomestico> eletrodomestico;
 }

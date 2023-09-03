@@ -54,10 +54,10 @@ public class CadastroEnderecoController {
     @PutMapping("/{id}")
     public ResponseEntity<EnderecoDto> atualizarEndereco(@PathVariable Long id,
                                               @RequestBody EnderecoDto endereco) {
-        var exists = repositorioEndereco.findByRuaAndNumeroIgnoreCaseAndIdNot(endereco.getRua(), endereco.getNumero(), id);
-        if (!exists.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
+//        var exists = repositorioEndereco.findByRuaAndNumeroIgnoreCaseAndIdNot(endereco.getRua(), endereco.getNumero(), id);
+//        if (!exists.isEmpty()) {
+//            return ResponseEntity.badRequest().build();
+//        }
         if (!repositorioEndereco.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
