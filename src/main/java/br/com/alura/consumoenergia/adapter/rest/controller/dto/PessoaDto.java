@@ -25,7 +25,7 @@ public class PessoaDto {
     private String nome;
     @Column(name = "DATA_NASCIMENTO")
     @NotBlank(message = "data de nascimento é um campo obrigatório e não pode estar em branco")
-    private Date data_nascimento;
+    private String data_nascimento;
     @Column(name = "CPF")
     @NotBlank(message = "cpf é um campo obrigatório e não pode estar em branco")
     private String cpf;
@@ -34,7 +34,6 @@ public class PessoaDto {
     private String sexo;
     @Column(name = "PARENTESCO")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "parentesco é um campo obrigatório e não pode estar em branco")
     private TipoParentesco grau_parentesco;
     @OneToMany
     @JoinColumn(name = "ID_ENDERECO")
